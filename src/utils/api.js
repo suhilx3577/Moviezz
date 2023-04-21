@@ -16,10 +16,12 @@ export const fetchData =  async (url,params) =>{
                 params,
             }
             )
-        return data
+        return data;
         
     } catch (error) {
         console.log(error)
         return error;
     }
 }
+
+
