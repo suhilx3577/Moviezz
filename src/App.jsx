@@ -26,7 +26,6 @@ const App =() =>{
     const apicall =()  =>{
         fetchData("/movie/popular")
             .then((res)=> {
-                console.log(res)
                 dispatch(getApiConfig(res))
             });
     };
