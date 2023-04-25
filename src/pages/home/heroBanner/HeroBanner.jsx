@@ -3,16 +3,18 @@ import {useNavigate} from "react-router-dom"
 import "./styles.scss"
 import useFetch from '../../../utils/hooks/useFetch'
 import { useEffect } from 'react'
+import {useSelector} from 'react-redux'
 
 const HeroBanner = () => {
   const navigate = useNavigate()
+  const {imageURL} = useSelector((state)=>state?.home?.url)
 
   const [background,setBackground] = useState("")
   const [query,setQuery] = useState("")
 
   const {data,loading} = useFetch("/movie/upcoming")
   useEffect(()=>{
-    const bg = data?.results[Math.floor(Math.random() * 20)]?.backdrop_path
+    const bg = imageURL+data?.results[Math.floor(Math.random() * 20)]?.backdrop_path
     setBackground(bg)
   },[data])
 

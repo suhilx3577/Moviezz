@@ -20,13 +20,17 @@ const App =() =>{
     const dispatch = useDispatch();
     const response = useSelector((store)=>store?.home?.url?.results)
     useEffect(()=>{
-        apicall();
+        fetchAPIConfig();
     },[])
     
-    const apicall =()  =>{
-        fetchData("/movie/popular")
+    const fetchAPIConfig =()  =>{
+        fetchData("/configuration")
             .then((res)=> {
-                dispatch(getApiConfig(res))
+                console.log(res)
+                const data = {
+                    imageURL : res?.images?.secure_base_url+"original"
+                }
+                dispatch(getApiConfig(data))
             });
     };
     
