@@ -1,3 +1,6 @@
+import lazyLoadImg from '../../../components/lazyLoad-image/lazyLoadImg'
+import contentWrapper from '../../../components/contentWrapper/contentWrapper'
+
 import React,{useState} from 'react'
 import {useNavigate} from "react-router-dom"
 import "./styles.scss"
@@ -22,11 +25,15 @@ const HeroBanner = () => {
     if(e.key === 'Enter' && query.length > 0){
       navigate(`/search/${query}`)
     }
-    // console.log(e)
   }
 
   return (
     <div className='heroBanner'>
+      <div className="backdrop-img">
+        <lazyLoadImg 
+        src={background}
+        />
+      </div>
       <div className="wrapper">
         <div className="heroBannerContent">
           <span className='title'> Welcome</span>
