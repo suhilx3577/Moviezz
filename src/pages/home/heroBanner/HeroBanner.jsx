@@ -1,4 +1,4 @@
-import lazyLoadImg from '../../../components/lazyLoad-image/lazyLoadImg'
+import LazyLoadImage from '../../../components/lazyLoad-image/lazyLoadImg'
 import contentWrapper from '../../../components/contentWrapper/contentWrapper'
 
 import React,{useState} from 'react'
@@ -29,11 +29,17 @@ const HeroBanner = () => {
 
   return (
     <div className='heroBanner'>
+      { !loading &&
       <div className="backdrop-img">
-        <lazyLoadImg 
+        <LazyLoadImage 
         src={background}
         />
       </div>
+      }
+      <div className="opacity-layer">
+        
+      </div>
+      <contentWrapper>
       <div className="wrapper">
         <div className="heroBannerContent">
           <span className='title'> Welcome</span>
@@ -49,6 +55,7 @@ const HeroBanner = () => {
           </div>
         </div>
       </div>
+      </contentWrapper>
     </div>
   )
 }
