@@ -43,8 +43,8 @@ const HeroBanner = () => {
       <div className="wrapper">
         <div className="heroBannerContent">
           <span className='title'> Welcome</span>
-          <span className='subTitle'> Millions of movies and TV shows</span>
-          <div className="searchInput">
+          <span className='sub-title'> Millions of movies and TV shows</span>
+          <div className="search-input">
             <input 
               type="text" 
               placeholder='Seach for Movies or TV shows'
