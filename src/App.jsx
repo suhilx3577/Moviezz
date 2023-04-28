@@ -26,7 +26,6 @@ const App =() =>{
     const fetchAPIConfig =()  =>{
         fetchData("/configuration")
             .then((res)=> {
-                console.log(res)
                 const data = {
                     imageURL : res?.images?.secure_base_url+"original"
                 }

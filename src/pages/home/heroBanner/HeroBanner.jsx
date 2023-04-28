@@ -1,12 +1,13 @@
-import LazyLoadImage from '../../../components/lazyLoad-image/lazyLoadImg'
-import contentWrapper from '../../../components/contentWrapper/contentWrapper'
-
 import React,{useState} from 'react'
 import {useNavigate} from "react-router-dom"
 import "./styles.scss"
 import useFetch from '../../../utils/hooks/useFetch'
 import { useEffect } from 'react'
 import {useSelector} from 'react-redux'
+
+import LazyLoadImage from '../../../components/lazyLoad-image/lazyLoadImg'
+import ContentWrapper from '../../../components/contentWrapper/ContentWrapper'
+
 
 const HeroBanner = () => {
   const navigate = useNavigate()
@@ -39,7 +40,7 @@ const HeroBanner = () => {
       <div className="opacity-layer">
         
       </div>
-      <contentWrapper>
+      <ContentWrapper>
       <div className="wrapper">
         <div className="heroBannerContent">
           <span className='title'> Welcome</span>
@@ -55,7 +56,7 @@ const HeroBanner = () => {
           </div>
         </div>
       </div>
-      </contentWrapper>
+      </ContentWrapper>
     </div>
   )
 }
