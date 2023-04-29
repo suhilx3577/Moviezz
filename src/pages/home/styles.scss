@@ -1,7 +1,7 @@
 .carousel-section{
     position: relative;
     margin-bottom: 70px;
-    &> .contentWrapper{
+    & > .contentWrapper{
         display:flex;
         align-items: center;
         justify-content: space-between;
@@ -9,7 +9,7 @@
     }
     .carousel-title{
         font-size: 24px;
-        color: whitesmoke;
+        color: white;
         font-weight: normal;
     }
 }
