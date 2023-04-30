@@ -3,27 +3,37 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
+import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import dayjs from "dayjs";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import PosterFallback from "../../assets/no-poster.png";
+import CircleRating from "../circleRating/CircleRating";
 
 import "./styles.scss";
 import '../../index.scss'
 import LazyLoadImage from "../lazyLoad-image/lazyLoadImg";
-const Carousel = ({ data, loading }) => {
+import Genres from "../genres/Genres";
+
+
+const Carousel = ({ data, loading ,endpoint}) => {
 
   const carouselContainer = useRef();
   const { url } = useSelector(state => state.home);
   const navigate = useNavigate();
 
-  const navigation = (direction) => {
-
+  const navigation = (dir) => {
+    const container = carouselContainer.current;
+    const scrollAmount = dir === 'left' ? container.scrollLeft - (container.offsetWidth + 20) : container.scrollLeft + (container.offsetWidth + 20);
+    container.scrollTo({
+      left: scrollAmount,
+      behavior:"smooth",
+    })
   }
-  const skitem = ()  => {
-    return(
+
+  const skitem = () => {
+    return (
       <div className="skeleton-item">
         <div className="poster-block skeleton"></div>
         <div className="text-block">
@@ -34,6 +44,7 @@ const Carousel = ({ data, loading }) => {
       </div>
     )
   }
+  // console.log(data)
 
   return (
     <div className="carousel">
@@ -47,34 +58,41 @@ const Carousel = ({ data, loading }) => {
           onClick={() => navigation('right')}
         />
         {!loading ? (
-            <div className="carousel-items">
-              {
-                data?.map((item)=>{
-                  const posterUrl = item.poster_path? url.imageURL+ item.poster_path : PosterFallback ;
-                  return(
-                    <div 
+          <div className="carousel-items" ref={carouselContainer}>
+            {
+              data?.map((item) => {
+                const posterUrl = item.poster_path ? url.imageURL + item.poster_path : PosterFallback;
+                return (
+                  <div
                     key={item.id}
-                    className="carousel-item">
-                      <div className="poster-block">
-                        <LazyLoadImage className='lazy-load' src={posterUrl}/>
-                      </div>
-                      <div className="text-block">
-                        <span className="title">{item.title || item.name}</span>
-                        <span className="date">{dayjs(item.release_Date).format('MMM D, YYYY')}</span>
-                      </div>
+                    className="carousel-item"
+                    onClick={()=>{
+                      navigate(`/${item.media_type || endpoint}/${item.id}`)
+                    }}
+                    >
+                    <div className="poster-block">
+                      <LazyLoadImage className='lazy-load' src={posterUrl} />
+                      <CircleRating rating={item.vote_average.toFixed(1)} />
+                      <Genres data={item?.genre_ids?.slice(0, 2)} />
                     </div>
-                  )})
-              }
-            </div>
-          ) : (
-            <div className="loading-skeleton">
-              {skitem()}
-              {skitem()}
-              {skitem()}
-              {skitem()}
-              {skitem()}
-            </div>
-          )}
+                    <div className="text-block">
+                      <span className="title">{item.title || item.name}</span>
+                      <span className="date">{dayjs(item.release_Date).format('MMM D, YYYY')}</span>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+        ) : (
+          <div className="loading-skeleton">
+            {skitem()}
+            {skitem()}
+            {skitem()}
+            {skitem()}
+            {skitem()}
+          </div>
+        )}
       </ContentWrapper>
     </div>
   )
