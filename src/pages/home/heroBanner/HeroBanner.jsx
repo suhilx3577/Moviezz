@@ -5,7 +5,7 @@ import useFetch from '../../../utils/hooks/useFetch'
 import { useEffect } from 'react'
 import {useSelector} from 'react-redux'
 
-import LazyLoadImage from '../../../components/lazyLoad-image/lazyLoadImg'
+import LazyImg from '../../../components/lazyLoad-image/lazyLoadImg'
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper'
 
 
@@ -32,7 +32,7 @@ const HeroBanner = () => {
     <div className='heroBanner'>
       { !loading &&
       <div className="backdrop-img">
-        <LazyLoadImage 
+        <LazyImg 
         src={background}
         />
       </div>
