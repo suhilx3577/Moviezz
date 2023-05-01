@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 
+import VideoPopup from "../../../components/videopopup/VideoPopup";
 import "./styles.scss";
 import { PlayIcon } from "../PlayBtn";
 
@@ -15,6 +16,9 @@ import PosterFallback from "../../../assets/no-poster.png";
 
 const DetailsBanner = ({ video, crew }) => {
 
+  const [show,setShow] = useState(false)
+  const [videoId, setVideoId] =useState(null)
+
   const { mediatype, id } = useParams();
   const { data, loading } = useFetch(`/${mediatype}/${id}`)
 
@@ -25,9 +29,12 @@ const DetailsBanner = ({ video, crew }) => {
   };
 
   const { imageURL } = useSelector(state => state.home.url)
-  console.log(imageURL)
 
   const _genres = data?.genres?.map((g) => g.id)
+  const director = crew?.filter((f)=> f.job ==="Director" || f.job ==="Directing")
+  const writer = crew?.filter((f)=> f.job ==="Screenplay" || f.job ==="Story" || f.job ==="Writer" || f.job==="Writing")
+
+
 
   return (
     <div className="detailsBanner">
@@ -72,7 +79,12 @@ const DetailsBanner = ({ video, crew }) => {
                   
                   <CircleRating rating={data?.vote_average.toFixed(1)} />
 
-                  <div className="playbtn">
+                  <div className="playbtn"
+                  onClick={()=>{
+                    setShow(true)
+                    setVideoId(video?.key)
+                  }}
+                  >
                     <PlayIcon />
                     <span className="text">Watch Trailer</span>
                   </div>
@@ -118,8 +130,74 @@ const DetailsBanner = ({ video, crew }) => {
                     </div>
                   ) }
                 </div>
+                {director?.length > 0 &&  (
+                  <div className="info">
+                    <span className="text bold">
+                      Director:{" "}
+                    </span>
+                    <span className="text">
+                      {director.map((d,i)=>(
+                        <span key={i}>
+                          {
+                            d.name
+                          }
+                          {
+                            director?.length -1 !== i && ', '
+                          }
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                )}
+
+                {writer?.length > 0 &&  (
+                  <div className="info">
+                    <span className="text bold">
+                      Writer:{" "}
+                    </span>
+                    <span className="text">
+                      {writer.map((d,i)=>(
+                        <span key={i}>
+                          {
+                            d.name
+                          }
+                          {
+                            writer?.length -1 !== i && ', '
+                          }
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                )}
+
+                {writer?.created_by > 0 &&  (
+                  <div className="info">
+                    <span className="text bold">
+                      Creator:{" "}
+                    </span>
+                    <span className="text">
+                      {created_by.map((d,i)=>(
+                        <span key={i}>
+                          {
+                            d.name
+                          }
+                          {
+                            created_by?.length -1 !== i && ', '
+                          }
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                )}
+
               </div>
             </div>
+            <VideoPopup 
+            show={show}
+            setShow={setShow}
+            videoId={videoId}
+            setVideoId={setVideoId}
+            />
           </ContentWrapper>
         </div>
       ) : (

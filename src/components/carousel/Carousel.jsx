@@ -17,7 +17,7 @@ import LazyLoadImage from "../lazyLoad-image/lazyLoadImg";
 import Genres from "../genres/Genres";
 
 
-const Carousel = ({ data, loading ,endpoint}) => {
+const Carousel = ({ data, loading ,endpoint ,title}) => {
 
   const carouselContainer = useRef();
   const { url } = useSelector(state => state.home);
@@ -49,6 +49,9 @@ const Carousel = ({ data, loading ,endpoint}) => {
   return (
     <div className="carousel">
       <ContentWrapper>
+        {title && 
+          <div className="carousel-title">{title}</div>
+        }
         <BsFillArrowLeftCircleFill
           className="carousel-left-nav arrow"
           onClick={() => navigation('left')}
@@ -77,7 +80,7 @@ const Carousel = ({ data, loading ,endpoint}) => {
                     </div>
                     <div className="text-block">
                       <span className="title">{item.title || item.name}</span>
-                      <span className="date">{dayjs(item.release_Date).format('MMM D, YYYY')}</span>
+                      <span className="date">{dayjs(item.release_date).format('MMM D, YYYY')}</span>
                     </div>
                   </div>
                 )
