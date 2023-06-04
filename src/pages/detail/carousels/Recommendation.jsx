@@ -11,7 +11,7 @@ const Recommendation = ({ mediatype, id }) => {
         `/${mediatype}/${id}/recommendations`
     );
 
-    console.log(data)
+    // console.log(data)
     return (
         data?.results?.length>2 && 
         <Carousel

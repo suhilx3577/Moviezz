@@ -6,7 +6,7 @@ const Similar = ({ mediatype, id }) => {
     const { data, loading, error } = useFetch(`/${mediatype}/${id}/similar`);
 
     const title = mediatype === "tv" ? "Similar TV Shows" : "Similar Movies";
-    console.log(data)
+    // console.log(data)
 
     return (
         data?.results?.length >1 &&
