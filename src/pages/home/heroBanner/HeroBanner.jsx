@@ -5,7 +5,7 @@ import useFetch from '../../../utils/hooks/useFetch'
 import { useEffect } from 'react'
 import {useSelector} from 'react-redux'
 
-import LazyImg from '../../../components/lazyLoad-image/lazyLoadImg'
+import LazyImg from '../../../components/lazyLoad-image/LazyLoadImg'
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper'
 
 

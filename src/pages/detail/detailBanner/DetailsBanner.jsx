@@ -11,7 +11,7 @@ import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import useFetch from "../../../utils/hooks/useFetch";
 import Genres from "../../../components/genres/Genres";
 import CircleRating from "../../../components/circleRating/CircleRating";
-import LazyLoadImage from "../../../components/lazyLoad-image/lazyLoadImg";
+import LazyLoadImg from "../../../components/lazyLoad-image/LazyLoadImg";
 import PosterFallback from "../../../assets/no-poster.png";
 
 const DetailsBanner = ({ video, crew }) => {
@@ -41,7 +41,7 @@ const DetailsBanner = ({ video, crew }) => {
       {!loading ? (
         <div>
           <div className="backdrop-img">
-            <LazyLoadImage
+            <LazyLoadImg
               src={imageURL + data?.backdrop_path}
               className='lazy-load-image-background'
             />
@@ -52,12 +52,12 @@ const DetailsBanner = ({ video, crew }) => {
               <div className="left">
                 {
                   data?.poster_path ? (
-                    <LazyLoadImage
+                    <LazyLoadImg
                       className='posterImg'
                       src={imageURL + data?.poster_path} />
 
                   ) : (
-                    <LazyLoadImage
+                    <LazyLoadImg
                       className='posterImg'
                       src={PosterFallback} />
                   )

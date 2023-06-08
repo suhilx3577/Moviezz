@@ -13,7 +13,7 @@ import CircleRating from "../circleRating/CircleRating";
 
 import "./styles.scss";
 import '../../index.scss'
-import LazyLoadImage from "../lazyLoad-image/lazyLoadImg";
+import LazyLoadImg from "../lazyLoad-image/LazyLoadImg";
 import Genres from "../genres/Genres";
 
 
@@ -74,7 +74,7 @@ const Carousel = ({ data, loading ,endpoint ,title}) => {
                     }}
                     >
                     <div className="poster-block">
-                      <LazyLoadImage className='lazy-load' src={posterUrl} />
+                      <img className='lazy-load' src={posterUrl} />
                       <CircleRating rating={item.vote_average.toFixed(1)} />
                       <Genres data={item?.genre_ids?.slice(0, 2)} />
                     </div>
